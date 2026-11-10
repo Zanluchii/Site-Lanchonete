@@ -48,6 +48,24 @@
   }, { passive: true });
   aoRolar();
 
+  /* ---------- Faixa rolante sem buracos em telas largas ---------- */
+  const trilho = document.querySelector(".faixa__trilho");
+  if (trilho) {
+    const modelo = trilho.firstElementChild.cloneNode(true);
+    function encherFaixa() {
+      trilho.replaceChildren(modelo.cloneNode(true));
+      const largura = trilho.firstElementChild.getBoundingClientRect().width || 1;
+      // Metade do trilho precisa cobrir a tela inteira para o loop não abrir espaço.
+      const copias = Math.max(2, 2 * Math.ceil(innerWidth / largura));
+      for (let i = 1; i < copias; i++) trilho.appendChild(modelo.cloneNode(true));
+      trilho.style.animationDuration = `${(largura * copias / 2) / 45}s`; // ~45 px/s
+    }
+    encherFaixa();
+    let t;
+    addEventListener("resize", () => { clearTimeout(t); t = setTimeout(encherFaixa, 200); });
+    if (document.fonts) document.fonts.ready.then(encherFaixa);
+  }
+
   /* ---------- Telefone na faixa de delivery ---------- */
   const tel = document.getElementById("delivery-telefone");
   if (tel) tel.href = CONFIG.telefoneLink;
