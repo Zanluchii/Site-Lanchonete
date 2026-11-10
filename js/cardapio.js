@@ -36,15 +36,34 @@
   }
 
   trilho.innerHTML = CATEGORIAS.map(
-    (c) => `<a href="#cat-${c.id}" data-cat="${c.id}"><span aria-hidden="true">${c.icone || ""}</span> ${Util.escapar(c.nome)}</a>`
+    (c) => `<a href="#cat-${c.id}" data-cat="${c.id}">${Util.escapar(c.nome)}</a>`
   ).join("");
 
   lista.innerHTML = CATEGORIAS.map((c) => `
     <section class="secao" id="cat-${c.id}">
-      <h2 class="secao__titulo" data-revelar><span class="secao__icone" aria-hidden="true">${c.icone || ""}</span>${Util.escapar(c.nome)}</h2>
+      <h2 class="secao__titulo" data-revelar>${Util.escapar(c.nome)}</h2>
       ${c.nota ? `<p class="secao__nota">${c.nota}</p>` : ""}
       <div class="grade">${c.itens.map((it, i) => cartao(it).replace('class="item', `style="--i:${i % 6}" data-revelar class="item`)).join("")}</div>
     </section>`).join("");
+
+  // Destaques da casa no topo do site
+  const DESTAQUES = ["modao", "costela-baguete", "churrasco"];
+  const listaDestaques = document.getElementById("destaques-lista");
+  if (listaDestaques) {
+    listaDestaques.innerHTML = DESTAQUES.map((id, i) => {
+      const it = ITENS_POR_ID[id];
+      return `<li><button class="destaque" data-id="${id}" style="--i:${i}">
+        <span class="destaque__num">0${i + 1}</span>
+        <span class="destaque__nome">${Util.escapar(it.nome)}</span>
+        <span class="destaque__preco">${precoDoItem(it)}</span>
+        <p class="destaque__desc">${Util.escapar(it.desc)}</p>
+      </button></li>`;
+    }).join("");
+    listaDestaques.addEventListener("click", (e) => {
+      const b = e.target.closest(".destaque");
+      if (b) Produto.abrir(ITENS_POR_ID[b.dataset.id]);
+    });
+  }
 
   lista.addEventListener("click", (e) => {
     const botao = e.target.closest(".item");

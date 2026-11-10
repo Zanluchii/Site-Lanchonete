@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Xexéu Lanches · Ouro Verde, Londrina</title>
   <meta name="description" content="Xexéu Lanches desde 1999. Hambúrguer artesanal, dogs, especiais da casa e combos. Peça pelo delivery ou retire no local.">
-  <meta name="theme-color" content="#c8201a">
+  <meta name="theme-color" content="#141110">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
 
   <main id="inicio">
     <section class="hero">
-      <div class="hero__raios" aria-hidden="true"></div>
+      <p class="hero__marca-dagua" aria-hidden="true">XEXÉU</p>
       <div class="hero__inner">
         <div class="hero__texto-col">
           <p class="hero__selo">Desde 1999 · Ouro Verde, Londrina</p>
@@ -42,46 +42,29 @@
           </h1>
           <p class="hero__texto">Hambúrguer artesanal de 120&nbsp;g, dogs, especiais da casa e combos para a família. Monte seu pedido aqui e envie direto pelo WhatsApp.</p>
           <div class="hero__acoes">
-            <a href="#cardapio" class="btn btn--amarelo btn--brilho">Pedir agora 🍔</a>
+            <a href="#cardapio" class="btn btn--principal">Ver cardápio <span class="seta" aria-hidden="true">→</span></a>
             <a href="#info" class="btn btn--contorno">Horários e endereço</a>
           </div>
           <ul class="hero__numeros">
             <li><strong data-contar="anos">0</strong><span>anos de casa</span></li>
-            <li><strong data-contar="4.4" data-decimais="1" data-sufixo=" ★">0</strong><span>nota no Google</span></li>
+            <li><strong><span data-contar="4.4" data-decimais="1">0</span> <em>★</em></strong><span>nota no Google</span></li>
             <li><strong data-contar="812" data-sufixo="+">0</strong><span>avaliações</span></li>
           </ul>
         </div>
 
-        <div class="hero__arte" aria-hidden="true">
-          <span class="flutua flutua--1">🍟</span>
-          <span class="flutua flutua--2">🌭</span>
-          <span class="flutua flutua--3">🥤</span>
-          <span class="flutua flutua--4">🧀</span>
-          <span class="flutua flutua--5">🥓</span>
-          <div class="burger">
-            <div class="burger__sombra"></div>
-            <div class="burger__pao-base camada" style="--d:0"></div>
-            <div class="burger__carne camada" style="--d:1"></div>
-            <div class="burger__queijo camada" style="--d:2"></div>
-            <div class="burger__tomate camada" style="--d:3"></div>
-            <div class="burger__alface camada" style="--d:4"></div>
-            <div class="burger__pao-topo camada" style="--d:5"></div>
+        <aside class="destaques" aria-labelledby="destaques-titulo">
+          <div class="destaques__topo">
+            <h2 class="destaques__titulo" id="destaques-titulo">Destaques da casa</h2>
+            <a href="#cardapio" class="destaques__ver">Cardápio completo →</a>
           </div>
-          <div class="selo-giro">
-            <svg viewBox="0 0 120 120"><defs><path id="circulo" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
-              <text><textPath href="#circulo">HAMBÚRGUER ARTESANAL • 120 G • </textPath></text></svg>
-            <span>120g</span>
-          </div>
-        </div>
+          <ul class="destaques__lista" id="destaques-lista"></ul>
+        </aside>
       </div>
     </section>
 
     <div class="faixas" aria-hidden="true">
-      <div class="faixa faixa--vermelha"><div class="faixa__trilho">
-        <span>Peça pelo delivery ★ Retire no balcão ★ Pix, cartão ou dinheiro ★ </span><span>Peça pelo delivery ★ Retire no balcão ★ Pix, cartão ou dinheiro ★ </span>
-      </div></div>
-      <div class="faixa faixa--amarela"><div class="faixa__trilho">
-        <span>🍔 Hambúrguer artesanal 🌭 Dogs 🔥 Especiais da casa 🎁 Combos 🍟 Porções </span><span>🍔 Hambúrguer artesanal 🌭 Dogs 🔥 Especiais da casa 🎁 Combos 🍟 Porções </span>
+      <div class="faixa"><div class="faixa__trilho">
+        <span>Hambúrguer artesanal 120 g<i></i>Dogs<i></i>Especiais da casa<i></i>Combos para a família<i></i>Delivery e retirada<i></i></span><span>Hambúrguer artesanal 120 g<i></i>Dogs<i></i>Especiais da casa<i></i>Combos para a família<i></i>Delivery e retirada<i></i></span>
       </div></div>
     </div>
 
