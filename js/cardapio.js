@@ -36,14 +36,14 @@
   }
 
   trilho.innerHTML = CATEGORIAS.map(
-    (c) => `<a href="#cat-${c.id}" data-cat="${c.id}">${Util.escapar(c.nome)}</a>`
+    (c) => `<a href="#cat-${c.id}" data-cat="${c.id}"><span aria-hidden="true">${c.icone || ""}</span> ${Util.escapar(c.nome)}</a>`
   ).join("");
 
   lista.innerHTML = CATEGORIAS.map((c) => `
     <section class="secao" id="cat-${c.id}">
-      <h2 class="secao__titulo">${Util.escapar(c.nome)}</h2>
+      <h2 class="secao__titulo" data-revelar><span class="secao__icone" aria-hidden="true">${c.icone || ""}</span>${Util.escapar(c.nome)}</h2>
       ${c.nota ? `<p class="secao__nota">${c.nota}</p>` : ""}
-      <div class="grade">${c.itens.map(cartao).join("")}</div>
+      <div class="grade">${c.itens.map((it, i) => cartao(it).replace('class="item', `style="--i:${i % 6}" data-revelar class="item`)).join("")}</div>
     </section>`).join("");
 
   lista.addEventListener("click", (e) => {

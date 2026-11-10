@@ -34,6 +34,7 @@ const CATEGORIAS = [
   {
     id: "artesanal",
     nome: "Hambúrguer Artesanal",
+    icone: "🍔",
     nota: "Todos com <strong>hambúrguer artesanal de 120 g</strong>. Peça duplo para dois hambúrgueres.",
     itens: [
       { id: "burguer-salada", nome: "Burguer Salada", desc: "Pão, hambúrguer, mussarela, maionese, alface, tomate e ketchup.", variantes: [{ nome: "Simples", preco: 24 }, { nome: "Duplo", preco: 32 }], adicionais: true },
@@ -47,6 +48,7 @@ const CATEGORIAS = [
   {
     id: "especiais",
     nome: "Especiais da Casa",
+    icone: "🔥",
     itens: [
       { id: "churrasco", nome: "Churrasco", desc: "Pão baguete, alcatra picada (170 g), bacon, mussarela, maionese de alho, ketchup, tomate e alface.", preco: 34, adicionais: true },
       { id: "costela-baguete", nome: "Costela na Baguete", desc: "Pão baguete, costela desfiada, mussarela, vinagrete e molho do chefe.", preco: 39, adicionais: true },
@@ -58,6 +60,7 @@ const CATEGORIAS = [
   {
     id: "dog",
     nome: "Dog",
+    icone: "🌭",
     itens: [
       { id: "hot-dog", nome: "Hot Dog", desc: "Pão de dog, salsicha, tomate, batata palha, maionese, ketchup e mostarda.", preco: 15, adicionais: true },
       { id: "dog-frango", nome: "Dog Frango", desc: "Pão de dog, salsicha, frango desfiado, tomate, maionese, ketchup e mostarda.", preco: 20, adicionais: true },
@@ -71,6 +74,7 @@ const CATEGORIAS = [
   {
     id: "tradicional",
     nome: "Hambúrguer Tradicional",
+    icone: "🧀",
     itens: [
       { id: "x-salada", nome: "X-Salada", desc: "Pão, hambúrguer, presunto, mussarela, maionese, ketchup, alface e tomate.", preco: 20, adicionais: true },
       { id: "x-bacon", nome: "X-Bacon", desc: "Pão, bacon, hambúrguer, presunto, mussarela, maionese, ketchup, alface e tomate.", preco: 27, adicionais: true },
@@ -84,6 +88,7 @@ const CATEGORIAS = [
   {
     id: "combos",
     nome: "Combos",
+    icone: "🎁",
     itens: [
       { id: "combo-kids", nome: "Combo Xexéu Kids", desc: "Pão, hambúrguer, mussarela, maionese e ketchup + suco Kapo + batata P.", preco: 24 },
       { id: "combo-casal", nome: "Combo Casal", desc: "2 lanches à escolha (Burguer Salada ou Dog Frango) + refrigerante 600 ml.", preco: 50,
@@ -97,6 +102,7 @@ const CATEGORIAS = [
   {
     id: "acompanhamentos",
     nome: "Acompanhamentos",
+    icone: "🍟",
     itens: [
       { id: "batata-p", nome: "Batata P", desc: "Porção pequena de batata frita.", preco: 9, molhos: true },
       { id: "batata-g", nome: "Batata G", desc: "Porção grande de batata frita.", preco: 12, molhos: true },
@@ -108,6 +114,7 @@ const CATEGORIAS = [
   {
     id: "bebidas",
     nome: "Bebidas",
+    icone: "🥤",
     itens: [
       { id: "refri-2l", nome: "Refrigerante 2 L", preco: 15, sabores: SABORES_REFRI },
       { id: "refri-600", nome: "Refrigerante 600 ml", preco: 9, sabores: SABORES_REFRI },
