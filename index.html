@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Xexéu Lanches · Ouro Verde, Londrina</title>
+  <meta name="description" content="Xexéu Lanches desde 1999. Hambúrguer artesanal, dogs, especiais da casa e combos. Peça pelo delivery ou retire no local.">
+  <meta name="theme-color" content="#c8201a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo__inner">
+      <a href="#inicio" class="logo" aria-label="Xexéu Lanches, início">
+        <span class="logo__nome">Xexéu</span>
+        <span class="logo__sub">Lanches</span>
+      </a>
+      <span class="status" id="status-topo" hidden></span>
+      <button class="btn-carrinho" id="abrir-carrinho" aria-label="Abrir carrinho">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM5.2 4l.4 2H20a1 1 0 0 1 1 1.2l-1.5 7A2 2 0 0 1 17.5 16H8a2 2 0 0 1-2-1.6L3.4 2H1V0h3.2a1 1 0 0 1 1 .8L5.2 4Z" transform="translate(1 1) scale(.92)"/></svg>
+        <span class="btn-carrinho__qtd" id="carrinho-qtd-topo">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero__inner">
+        <p class="hero__selo">Desde 1999 · Ouro Verde, Londrina</p>
+        <p class="status status--hero" id="status-hero" hidden></p>
+        <h1 class="hero__titulo">Lanche de verdade,<br><span>sabor em tudo que faz.</span></h1>
+        <p class="hero__texto">Hambúrguer artesanal de 120&nbsp;g, dogs, especiais da casa e combos para a família. Monte seu pedido aqui e envie direto pelo WhatsApp.</p>
+        <div class="hero__acoes">
+          <a href="#cardapio" class="btn btn--amarelo">Ver cardápio</a>
+          <a href="#info" class="btn btn--contorno">Horários e endereço</a>
+        </div>
+        <ul class="hero__destaques">
+          <li><strong>4,4 ★</strong> 812 avaliações no Google</li>
+          <li><strong>Delivery</strong> ou retirada no local</li>
+          <li><strong>Pix, cartão</strong> ou dinheiro</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="categorias" id="categorias" aria-label="Categorias do cardápio">
+      <div class="categorias__trilho" id="categorias-trilho"></div>
+    </nav>
+
+    <section class="cardapio" id="cardapio" aria-label="Cardápio">
+      <div id="cardapio-lista"></div>
+      <p class="aviso-troca">Não fazemos a troca de ingredientes de um lanche por outro. Para retirar algum ingrediente, use o campo de observação.</p>
+    </section>
+
+    <section class="info" id="info">
+      <div class="info__grid">
+        <div class="info__bloco">
+          <h2>Horário de funcionamento</h2>
+          <p class="status status--grande" id="status-info" hidden></p>
+          <table class="horarios" id="tabela-horarios"></table>
+          <p class="info__nota">Em feriados o horário pode mudar.</p>
+        </div>
+        <div class="info__bloco">
+          <h2>Onde estamos</h2>
+          <p id="info-endereco"></p>
+          <p><a id="info-maps" class="link" target="_blank" rel="noopener">Abrir no Google Maps →</a></p>
+          <h2>Disk entrega</h2>
+          <p><a id="info-telefone" class="link link--grande"></a></p>
+          <p class="info__nota">Área externa coberta e ambiente familiar.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p><strong>Xexéu Lanches</strong> · desde 1999</p>
+    <p>Preços sujeitos a alteração sem aviso prévio.</p>
+  </footer>
+
+  <!-- Barra fixa do carrinho (celular) -->
+  <button class="barra-carrinho" id="barra-carrinho" hidden>
+    <span class="barra-carrinho__qtd" id="barra-qtd">0</span>
+    <span>Ver pedido</span>
+    <span class="barra-carrinho__total" id="barra-total">R$ 0,00</span>
+  </button>
+
+  <!-- Modal de produto -->
+  <div class="modal" id="modal-produto" hidden>
+    <div class="modal__fundo" data-fechar></div>
+    <div class="modal__caixa" role="dialog" aria-modal="true" aria-labelledby="produto-nome">
+      <button class="modal__fechar" data-fechar aria-label="Fechar">×</button>
+      <form id="form-produto" class="produto">
+        <div class="produto__corpo">
+          <p class="produto__categoria" id="produto-categoria"></p>
+          <h2 class="produto__nome" id="produto-nome"></h2>
+          <p class="produto__desc" id="produto-desc"></p>
+          <div id="produto-opcoes"></div>
+          <label class="campo">
+            <span class="campo__rotulo">Observação</span>
+            <textarea id="produto-obs" rows="2" maxlength="200" placeholder="Ex.: sem tomate, sem cebola…"></textarea>
+          </label>
+        </div>
+        <div class="produto__rodape">
+          <div class="qtd">
+            <button type="button" class="qtd__btn" id="produto-menos" aria-label="Diminuir quantidade">−</button>
+            <span class="qtd__valor" id="produto-qtd">1</span>
+            <button type="button" class="qtd__btn" id="produto-mais" aria-label="Aumentar quantidade">+</button>
+          </div>
+          <button type="submit" class="btn btn--vermelho btn--bloco" id="produto-adicionar">
+            Adicionar <span id="produto-total"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Gaveta do carrinho / finalização -->
+  <div class="gaveta" id="gaveta" hidden>
+    <div class="gaveta__fundo" data-fechar-gaveta></div>
+    <aside class="gaveta__painel" role="dialog" aria-modal="true" aria-labelledby="gaveta-titulo">
+      <header class="gaveta__topo">
+        <button class="gaveta__voltar" id="gaveta-voltar" hidden aria-label="Voltar ao carrinho">←</button>
+        <h2 id="gaveta-titulo">Seu pedido</h2>
+        <button class="gaveta__fechar" data-fechar-gaveta aria-label="Fechar">×</button>
+      </header>
+
+      <div class="gaveta__conteudo" id="etapa-carrinho">
+        <ul class="itens" id="carrinho-itens"></ul>
+        <div class="vazio" id="carrinho-vazio">
+          <p>Seu carrinho está vazio.</p>
+          <button class="btn btn--vermelho" data-fechar-gaveta>Ver cardápio</button>
+        </div>
+      </div>
+
+      <form class="gaveta__conteudo" id="etapa-checkout" hidden novalidate></form>
+
+      <footer class="gaveta__rodape" id="gaveta-rodape">
+        <div class="resumo" id="resumo"></div>
+        <button class="btn btn--vermelho btn--bloco" id="gaveta-acao">Continuar</button>
+      </footer>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/dados.js"></script>
+  <script src="js/horario.js"></script>
+  <script src="js/cardapio.js"></script>
+  <script src="js/produto.js"></script>
+  <script src="js/carrinho.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>
