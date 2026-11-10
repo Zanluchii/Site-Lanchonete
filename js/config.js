@@ -32,3 +32,15 @@ const CONFIG = {
     6: ["18:30", "24:00"],
   },
 };
+
+/*
+ * Assinatura do desenvolvedor no rodapé.
+ * O link usa o primeiro preenchido: WhatsApp, depois Instagram, depois o site.
+ */
+const DESENVOLVEDOR = {
+  nome: "Zanluchi",
+  whatsapp: "",  // só dígitos, ex.: "5543999999999"
+  instagram: "", // só o usuário, sem @
+  site: "https://github.com/Zanluchii",
+  mensagem: "Olá! Vi o site da Xexéu Lanches e quero um site para o meu negócio.",
+};
