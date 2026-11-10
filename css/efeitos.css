@@ -1,0 +1,336 @@
+/* ===== Efeitos visuais e animações ===== */
+
+body {
+  background-color: var(--fundo);
+  background-image: radial-gradient(rgba(200, 32, 26, .07) 1.2px, transparent 1.3px);
+  background-size: 18px 18px;
+}
+
+/* ---------- Topo: barra de progresso e sombra ao rolar ---------- */
+.topo { transition: box-shadow .25s, background .25s; }
+.topo.rolou { box-shadow: 0 6px 20px rgba(110, 15, 11, .35); }
+.topo__progresso {
+  position: absolute; left: 0; bottom: -3px; height: 3px; width: 100%;
+  background: linear-gradient(90deg, var(--amarelo), #ff8a00);
+  transform-origin: 0 50%; transform: scaleX(0);
+}
+.logo__nome { display: inline-block; transition: transform .3s cubic-bezier(.3, 1.6, .5, 1); }
+.logo:hover .logo__nome { transform: rotate(-8deg) scale(1.08); }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; isolation: isolate; }
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 40px; z-index: 1;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .18));
+  pointer-events: none;
+}
+.hero__raios {
+  position: absolute; z-index: -1; width: 1400px; height: 1400px;
+  right: -520px; top: 50%; margin-top: -700px;
+  background: repeating-conic-gradient(rgba(255, 198, 41, .16) 0 9deg, transparent 9deg 18deg);
+  border-radius: 50%;
+  -webkit-mask: radial-gradient(circle, #000 15%, transparent 62%);
+          mask: radial-gradient(circle, #000 15%, transparent 62%);
+  animation: girar 60s linear infinite;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+
+.hero__inner {
+  display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center;
+  padding-top: 36px; padding-bottom: 48px;
+}
+@media (min-width: 900px) {
+  .hero__inner { grid-template-columns: 1.1fr .9fr; padding-top: 56px; padding-bottom: 72px; }
+}
+
+.hero__selo { animation: entrar .6s .1s both; }
+.status--hero { animation: entrar .6s .2s both; }
+.hero__titulo { display: flex; flex-direction: column; }
+.hero__titulo .linha { display: block; overflow: hidden; padding-bottom: .04em; }
+.hero__titulo .linha > span {
+  display: inline-block; color: #fff;
+  animation: subirTexto .8s cubic-bezier(.2, .9, .2, 1) both;
+}
+.hero__titulo .linha:nth-child(2) > span { animation-delay: .12s; }
+.hero__titulo .linha:nth-child(3) > span { animation-delay: .24s; }
+.hero__titulo .linha--amarela > span {
+  color: var(--amarelo);
+  text-shadow: 3px 3px 0 var(--vermelho-escuro), 5px 5px 0 rgba(0, 0, 0, .35);
+}
+@keyframes subirTexto { from { transform: translateY(105%) rotate(4deg); } }
+.hero__texto { animation: entrar .7s .45s both; }
+.hero__acoes { animation: entrar .7s .55s both; }
+@keyframes entrar { from { opacity: 0; transform: translateY(18px); } }
+
+/* Botão com brilho passando */
+.btn--brilho { position: relative; overflow: hidden; box-shadow: 0 6px 0 var(--amarelo-escuro), 0 10px 24px rgba(0, 0, 0, .25); }
+.btn--brilho:hover { transform: translateY(-2px); }
+.btn--brilho:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--amarelo-escuro); }
+.btn--brilho::after {
+  content: ""; position: absolute; top: -50%; bottom: -50%; width: 40%; left: -60%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .75), transparent);
+  transform: skewX(-20deg);
+  animation: brilho 3.2s 1.5s ease-in-out infinite;
+}
+@keyframes brilho { 0% { left: -60%; } 30%, 100% { left: 130%; } }
+
+/* Números */
+.hero__numeros {
+  list-style: none; padding: 0; margin: 4px 0 0;
+  display: flex; gap: 12px; flex-wrap: wrap;
+  animation: entrar .7s .7s both;
+}
+.hero__numeros li {
+  display: flex; flex-direction: column; min-width: 96px;
+  padding: 10px 14px; border-radius: 14px;
+  background: rgba(0, 0, 0, .18); border: 1px solid rgba(255, 255, 255, .15);
+  backdrop-filter: blur(4px);
+}
+.hero__numeros strong {
+  font-family: var(--fonte-titulo); font-weight: 400; font-size: 1.9rem; line-height: 1;
+  color: var(--amarelo); font-variant-numeric: tabular-nums;
+}
+.hero__numeros span { font-size: .78rem; opacity: .85; margin-top: 4px; }
+
+/* ---------- Hambúrguer animado ---------- */
+.hero__arte {
+  position: relative; height: 300px; display: grid; place-items: center;
+}
+@media (min-width: 900px) { .hero__arte { height: 440px; } }
+
+.burger {
+  --w: 230px;
+  position: relative; width: var(--w); height: calc(var(--w) * .92);
+  animation: flutuar 4s 2s ease-in-out infinite;
+  filter: drop-shadow(0 18px 18px rgba(0, 0, 0, .3));
+}
+@media (min-width: 900px) { .burger { --w: 320px; } }
+@keyframes flutuar { 50% { transform: translateY(-12px) rotate(-2deg); } }
+
+.camada {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  animation: cair .7s calc(.3s + var(--d) * .14s) cubic-bezier(.3, 1.5, .55, 1) both;
+}
+@keyframes cair {
+  from { opacity: 0; transform: translate(-50%, -260px) rotate(-12deg); }
+  60% { opacity: 1; }
+}
+.burger__sombra {
+  position: absolute; left: 50%; bottom: -14px; width: 80%; height: 16px; transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(0, 0, 0, .45), transparent 70%);
+  animation: sombra 4s 2s ease-in-out infinite;
+}
+@keyframes sombra { 50% { transform: translateX(-50%) scale(.85); opacity: .7; } }
+
+.burger__pao-base {
+  bottom: 0; width: 88%; height: 17%;
+  background: linear-gradient(#f2b24e, #c97a1f);
+  border-radius: 10px 10px 50% 50% / 10px 10px 70% 70%;
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .12);
+}
+.burger__carne {
+  bottom: 15%; width: 94%; height: 19%;
+  background:
+    repeating-linear-gradient(100deg, transparent 0 14px, rgba(0, 0, 0, .18) 14px 17px),
+    radial-gradient(circle at 30% 40%, #7a3d1c, #4a220d 70%);
+  border-radius: 40px;
+  box-shadow: inset 0 4px 0 rgba(255, 255, 255, .12), inset 0 -5px 0 rgba(0, 0, 0, .25);
+}
+.burger__queijo {
+  bottom: 31%; width: 98%; height: 12%;
+  background: linear-gradient(#ffd84a, #ffb800);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 90% 45%, 84% 100%, 78% 45%, 55% 45%, 48% 85%, 41% 45%, 20% 45%, 13% 110%, 6% 45%, 0 45%);
+}
+.burger__tomate {
+  bottom: 36%; width: 86%; height: 9%;
+  background: linear-gradient(#ff5a4a, #d0281c);
+  border-radius: 20px;
+}
+.burger__alface {
+  bottom: 42%; width: 100%; height: 10%;
+  background: linear-gradient(#8fe04a, #4caf2a);
+  clip-path: polygon(0 20%, 5% 0, 10% 25%, 16% 0, 22% 30%, 28% 0, 34% 25%, 40% 0, 46% 30%, 52% 0, 58% 25%, 64% 0, 70% 30%, 76% 0, 82% 25%, 88% 0, 94% 25%, 100% 5%, 98% 70%, 92% 100%, 86% 70%, 80% 100%, 72% 70%, 64% 100%, 56% 70%, 48% 100%, 40% 70%, 32% 100%, 24% 70%, 16% 100%, 8% 70%, 2% 100%);
+}
+.burger__pao-topo {
+  bottom: 48%; width: 92%; height: 44%;
+  background:
+    radial-gradient(ellipse 4px 2.5px at 30% 30%, #fff6dc 90%, transparent),
+    radial-gradient(ellipse 4px 2.5px at 50% 18%, #fff6dc 90%, transparent),
+    radial-gradient(ellipse 4px 2.5px at 68% 32%, #fff6dc 90%, transparent),
+    radial-gradient(ellipse 4px 2.5px at 40% 50%, #fff6dc 90%, transparent),
+    radial-gradient(ellipse 4px 2.5px at 60% 55%, #fff6dc 90%, transparent),
+    radial-gradient(ellipse 4px 2.5px at 22% 55%, #fff6dc 90%, transparent),
+    radial-gradient(ellipse 4px 2.5px at 80% 52%, #fff6dc 90%, transparent),
+    radial-gradient(circle at 35% 25%, #ffd27a, transparent 45%),
+    linear-gradient(#f5a93a, #d17d1b);
+  border-radius: 50% 50% 14px 14px / 85% 85% 14px 14px;
+  box-shadow: inset 0 -8px 0 rgba(0, 0, 0, .1);
+}
+
+/* Lanches flutuando em volta */
+.flutua {
+  position: absolute; font-size: 2.2rem; z-index: 1;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .3));
+  animation: aparecer .5s calc(1.4s + var(--a, 0s)) both, boiar 5s calc(1.4s + var(--a, 0s)) ease-in-out infinite;
+}
+.flutua--1 { top: 6%; left: 8%; --a: 0s; }
+.flutua--2 { top: 12%; right: 6%; --a: .3s; font-size: 2.6rem; }
+.flutua--3 { bottom: 10%; left: 4%; --a: .6s; }
+.flutua--4 { bottom: 16%; right: 10%; --a: .9s; font-size: 1.8rem; }
+.flutua--5 { top: 46%; left: -2%; --a: 1.2s; font-size: 1.6rem; }
+@keyframes boiar {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-16px) rotate(8deg); }
+}
+
+/* Selo giratório "120g" */
+.selo-giro {
+  position: absolute; right: 4%; bottom: 2%; width: 96px; height: 96px; z-index: 2;
+  display: grid; place-items: center;
+  background: var(--amarelo); color: var(--tinta); border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .3);
+  animation: aparecer .5s 1.6s both;
+}
+@media (min-width: 900px) { .selo-giro { width: 120px; height: 120px; right: 8%; } }
+.selo-giro svg { position: absolute; inset: 0; animation: girar 14s linear infinite; }
+.selo-giro text { font: 800 11.5px var(--fonte); letter-spacing: 1.2px; fill: var(--vermelho-escuro); }
+.selo-giro > span { font-family: var(--fonte-titulo); font-size: 1.5rem; color: var(--vermelho); }
+
+/* ---------- Faixas rolantes ---------- */
+.faixas { position: relative; height: 110px; overflow: hidden; margin: -22px 0 -10px; z-index: 2; pointer-events: none; }
+.faixa {
+  position: absolute; left: -5%; width: 110%; padding: 10px 0;
+  font-family: var(--fonte-titulo); text-transform: uppercase; letter-spacing: 1px;
+  font-size: 1.25rem; white-space: nowrap; overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .15);
+}
+.faixa--vermelha { top: 18px; background: var(--tinta); color: var(--amarelo); transform: rotate(2.2deg); }
+.faixa--amarela { top: 48px; background: var(--amarelo); color: var(--vermelho-escuro); transform: rotate(-2deg); }
+.faixa__trilho { display: inline-flex; animation: rolar 28s linear infinite; }
+.faixa--amarela .faixa__trilho { animation-direction: reverse; animation-duration: 34s; }
+.faixa__trilho span { padding-right: 24px; }
+@keyframes rolar { to { transform: translateX(-50%); } }
+
+/* ---------- Abas de categoria ---------- */
+.categorias { transition: box-shadow .2s; }
+.categorias a { transition: background .2s, color .2s, transform .2s; }
+.categorias a:hover { transform: translateY(-2px); }
+.categorias a.ativa { box-shadow: 0 4px 12px rgba(200, 32, 26, .35); }
+
+/* ---------- Seções e cartões ---------- */
+.secao__titulo { display: inline-flex; align-items: center; gap: 10px; box-shadow: 4px 4px 0 var(--amarelo); }
+.secao__icone { font-size: 1.3rem; display: inline-block; }
+.secao__titulo.visivel .secao__icone { animation: sacudir .8s .3s; }
+@keyframes sacudir {
+  20% { transform: rotate(-18deg) scale(1.2); }
+  40% { transform: rotate(14deg) scale(1.2); }
+  60% { transform: rotate(-8deg); }
+  80% { transform: rotate(4deg); }
+}
+
+.item { position: relative; overflow: hidden; isolation: isolate; }
+.item::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(var(--vermelho), var(--amarelo));
+  transform: scaleY(0); transform-origin: top; transition: transform .25s;
+}
+.item::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 198, 41, .22) 48%, transparent 66%);
+  transform: translateX(-100%); transition: transform .6s;
+}
+.item:hover::before { transform: scaleY(1); }
+.item:hover::after { transform: translateX(100%); }
+.item:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(160, 60, 20, .16); }
+.item__mais { transition: transform .3s cubic-bezier(.3, 1.6, .5, 1), background .2s, color .2s; }
+.item:hover .item__mais { transform: rotate(90deg) scale(1.12); background: var(--vermelho); color: #fff; }
+.item:active { transform: scale(.98); }
+.item__preco { transition: color .2s; }
+.item:hover .item__preco { color: var(--vermelho); }
+
+/* Revelar ao rolar */
+.js-efeitos [data-revelar] { opacity: 0; transform: translateY(28px); }
+.js-efeitos [data-revelar].visivel {
+  opacity: 1; transform: none;
+  transition: opacity .6s ease, transform .6s cubic-bezier(.2, .9, .2, 1), box-shadow .15s, border-color .15s;
+  transition-delay: calc(var(--i, 0) * 70ms), calc(var(--i, 0) * 70ms), 0s, 0s;
+}
+.js-efeitos .secao__titulo[data-revelar] { transform: translateX(-30px) rotate(-1deg); }
+.js-efeitos .secao__titulo[data-revelar].visivel { transform: rotate(-1deg); }
+.js-efeitos .item.visivel:hover { transform: translateY(-3px); transition-delay: 0s; }
+
+/* ---------- Faixa de delivery ---------- */
+.delivery {
+  position: relative; overflow: hidden; color: #fff; text-align: center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 198, 41, .25), transparent 35%),
+    linear-gradient(135deg, #1d1a17, #3a1410 60%, var(--vermelho-escuro));
+  padding: 56px 16px 96px;
+}
+.js-efeitos .delivery[data-revelar] { transform: none; }
+.delivery__inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+.delivery__titulo {
+  font-family: var(--fonte-titulo); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.05; margin: 0 0 12px;
+}
+.delivery__titulo span { color: var(--amarelo); }
+.delivery p { opacity: .85; margin: 0 0 22px; }
+.delivery__acoes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.delivery__estrada {
+  position: absolute; left: 0; right: 0; bottom: 26px; height: 4px;
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 28px, transparent 28px 56px);
+  animation: estrada 1s linear infinite;
+}
+@keyframes estrada { to { background-position: -56px 0; } }
+.delivery__moto {
+  position: absolute; bottom: 0; left: 0; font-size: 2.6rem;
+  transform: scaleX(-1);
+  animation: pilotar 7s linear infinite;
+}
+@keyframes pilotar {
+  from { left: -60px; }
+  to { left: 100%; }
+}
+.delivery__moto::after { content: ""; }
+
+/* ---------- Lanche voando até o carrinho ---------- */
+.voador {
+  position: fixed; z-index: 70; font-size: 2rem; pointer-events: none; left: 0; top: 0;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .35));
+}
+.btn-carrinho.pulo { animation: pulo .5s cubic-bezier(.3, 1.8, .5, 1); }
+@keyframes pulo { 40% { transform: scale(1.3) rotate(-12deg); } }
+.barra-carrinho { transition: transform .2s; }
+.barra-carrinho.pulo { animation: puloBarra .5s; }
+@keyframes puloBarra { 40% { transform: scale(1.05); } }
+
+/* ---------- Comemoração ---------- */
+.festa {
+  position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 16px;
+  background: rgba(20, 10, 5, .6); animation: aparecer .25s;
+}
+.festa__caixa {
+  position: relative; z-index: 1; text-align: center; max-width: 360px; width: 100%;
+  background: #fff; border-radius: 24px; padding: 28px 22px 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .35);
+  animation: estourar .5s cubic-bezier(.3, 1.6, .5, 1);
+  overflow: hidden;
+}
+.festa__caixa::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 8px;
+  background: repeating-linear-gradient(90deg, var(--vermelho) 0 20px, var(--amarelo) 20px 40px);
+}
+@keyframes estourar { from { transform: scale(.6); opacity: 0; } }
+.festa__moto { font-size: 3.4rem; animation: acelerar 1.2s ease-out; }
+@keyframes acelerar { from { transform: translateX(200px); } 70% { transform: translateX(-12px); } }
+.festa h2 {
+  font-family: var(--fonte-titulo); font-weight: 400; text-transform: uppercase; color: var(--vermelho);
+  font-size: 2rem; margin: 8px 0;
+}
+.festa p { color: var(--tinta-2); margin: 0 0 20px; }
+.confete { position: fixed; z-index: 0; width: 10px; height: 14px; top: 0; left: 0; pointer-events: none; border-radius: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-efeitos [data-revelar] { opacity: 1 !important; transform: none !important; }
+  .faixa__trilho, .hero__raios, .selo-giro svg { animation: none !important; }
+}

@@ -10,9 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/efeitos.css">
 </head>
 <body>
-  <header class="topo">
+  <header class="topo" id="topo">
+    <div class="topo__progresso" id="progresso" aria-hidden="true"></div>
     <div class="topo__inner">
       <a href="#inicio" class="logo" aria-label="Xexéu Lanches, início">
         <span class="logo__nome">Xexéu</span>
@@ -28,22 +30,60 @@
 
   <main id="inicio">
     <section class="hero">
+      <div class="hero__raios" aria-hidden="true"></div>
       <div class="hero__inner">
-        <p class="hero__selo">Desde 1999 · Ouro Verde, Londrina</p>
-        <p class="status status--hero" id="status-hero" hidden></p>
-        <h1 class="hero__titulo">Lanche de verdade,<br><span>sabor em tudo que faz.</span></h1>
-        <p class="hero__texto">Hambúrguer artesanal de 120&nbsp;g, dogs, especiais da casa e combos para a família. Monte seu pedido aqui e envie direto pelo WhatsApp.</p>
-        <div class="hero__acoes">
-          <a href="#cardapio" class="btn btn--amarelo">Ver cardápio</a>
-          <a href="#info" class="btn btn--contorno">Horários e endereço</a>
+        <div class="hero__texto-col">
+          <p class="hero__selo">Desde 1999 · Ouro Verde, Londrina</p>
+          <p class="status status--hero" id="status-hero" hidden></p>
+          <h1 class="hero__titulo">
+            <span class="linha"><span>Lanche de verdade,</span></span>
+            <span class="linha linha--amarela"><span>sabor em tudo</span></span>
+            <span class="linha linha--amarela"><span>que faz.</span></span>
+          </h1>
+          <p class="hero__texto">Hambúrguer artesanal de 120&nbsp;g, dogs, especiais da casa e combos para a família. Monte seu pedido aqui e envie direto pelo WhatsApp.</p>
+          <div class="hero__acoes">
+            <a href="#cardapio" class="btn btn--amarelo btn--brilho">Pedir agora 🍔</a>
+            <a href="#info" class="btn btn--contorno">Horários e endereço</a>
+          </div>
+          <ul class="hero__numeros">
+            <li><strong data-contar="anos">0</strong><span>anos de casa</span></li>
+            <li><strong data-contar="4.4" data-decimais="1" data-sufixo=" ★">0</strong><span>nota no Google</span></li>
+            <li><strong data-contar="812" data-sufixo="+">0</strong><span>avaliações</span></li>
+          </ul>
         </div>
-        <ul class="hero__destaques">
-          <li><strong>4,4 ★</strong> 812 avaliações no Google</li>
-          <li><strong>Delivery</strong> ou retirada no local</li>
-          <li><strong>Pix, cartão</strong> ou dinheiro</li>
-        </ul>
+
+        <div class="hero__arte" aria-hidden="true">
+          <span class="flutua flutua--1">🍟</span>
+          <span class="flutua flutua--2">🌭</span>
+          <span class="flutua flutua--3">🥤</span>
+          <span class="flutua flutua--4">🧀</span>
+          <span class="flutua flutua--5">🥓</span>
+          <div class="burger">
+            <div class="burger__sombra"></div>
+            <div class="burger__pao-base camada" style="--d:0"></div>
+            <div class="burger__carne camada" style="--d:1"></div>
+            <div class="burger__queijo camada" style="--d:2"></div>
+            <div class="burger__tomate camada" style="--d:3"></div>
+            <div class="burger__alface camada" style="--d:4"></div>
+            <div class="burger__pao-topo camada" style="--d:5"></div>
+          </div>
+          <div class="selo-giro">
+            <svg viewBox="0 0 120 120"><defs><path id="circulo" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+              <text><textPath href="#circulo">HAMBÚRGUER ARTESANAL • 120 G • </textPath></text></svg>
+            <span>120g</span>
+          </div>
+        </div>
       </div>
     </section>
+
+    <div class="faixas" aria-hidden="true">
+      <div class="faixa faixa--vermelha"><div class="faixa__trilho">
+        <span>Peça pelo delivery ★ Retire no balcão ★ Pix, cartão ou dinheiro ★ </span><span>Peça pelo delivery ★ Retire no balcão ★ Pix, cartão ou dinheiro ★ </span>
+      </div></div>
+      <div class="faixa faixa--amarela"><div class="faixa__trilho">
+        <span>🍔 Hambúrguer artesanal 🌭 Dogs 🔥 Especiais da casa 🎁 Combos 🍟 Porções </span><span>🍔 Hambúrguer artesanal 🌭 Dogs 🔥 Especiais da casa 🎁 Combos 🍟 Porções </span>
+      </div></div>
+    </div>
 
     <nav class="categorias" id="categorias" aria-label="Categorias do cardápio">
       <div class="categorias__trilho" id="categorias-trilho"></div>
@@ -51,7 +91,19 @@
 
     <section class="cardapio" id="cardapio" aria-label="Cardápio">
       <div id="cardapio-lista"></div>
-      <p class="aviso-troca">Não fazemos a troca de ingredientes de um lanche por outro. Para retirar algum ingrediente, use o campo de observação.</p>
+      <p class="aviso-troca" data-revelar>Não fazemos a troca de ingredientes de um lanche por outro. Para retirar algum ingrediente, use o campo de observação.</p>
+    </section>
+
+    <section class="delivery" data-revelar>
+      <div class="delivery__estrada" aria-hidden="true"><span class="delivery__moto">🛵</span></div>
+      <div class="delivery__inner">
+        <h2 class="delivery__titulo">Bateu a fome?<br><span>A gente leva até você!</span></h2>
+        <p>Monte seu pedido pelo site e envie direto no WhatsApp, ou ligue para o disk entrega.</p>
+        <div class="delivery__acoes">
+          <a href="#cardapio" class="btn btn--amarelo btn--brilho">Montar meu pedido</a>
+          <a class="btn btn--contorno" id="delivery-telefone">📞 Ligar</a>
+        </div>
+      </div>
     </section>
 
     <section class="info" id="info">
@@ -145,6 +197,16 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <!-- Comemoração ao enviar o pedido -->
+  <div class="festa" id="festa" hidden>
+    <div class="festa__caixa" role="dialog" aria-modal="true" aria-labelledby="festa-titulo">
+      <div class="festa__moto" aria-hidden="true">🛵💨</div>
+      <h2 id="festa-titulo">Pedido enviado!</h2>
+      <p id="festa-texto">Agora é só confirmar a mensagem no WhatsApp. Já já seu lanche está a caminho!</p>
+      <button class="btn btn--vermelho" id="festa-fechar">Beleza!</button>
+    </div>
+  </div>
+
   <script src="js/config.js"></script>
   <script src="js/util.js"></script>
   <script src="js/dados.js"></script>
@@ -153,5 +215,6 @@
   <script src="js/produto.js"></script>
   <script src="js/carrinho.js"></script>
   <script src="js/checkout.js"></script>
+  <script src="js/efeitos.js"></script>
 </body>
 </html>
