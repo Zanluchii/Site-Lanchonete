@@ -178,7 +178,7 @@ const Checkout = (function () {
     window.open(url, "_blank", "noopener");
     Carrinho.limpar();
     Carrinho.fecharGaveta();
-    Util.toast("Pedido enviado! Confirme no WhatsApp.");
+    document.dispatchEvent(new CustomEvent("pedido-enviado", { detail: { nome: valor("nome") } }));
   }
 
   function mostrar() {
